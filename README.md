@@ -2,11 +2,14 @@
 
 给定已训练的图分类模型、输入图和指定目标类别，研究满足约束且扰动尽可能小的图修改方法。
 
-开始工作前阅读 [AGENTS.md](AGENTS.md)。当前仅初始化科研目录与协作规范，研究设置尚待确认，未下载论文、安装依赖或运行实验。
+当前已建立源码目录骨架，并完成 GNNBoundary（ICLR 2024）及两篇 TMLR 2025 复现研究的全文研读。当前研究设想是以边界图的中间层 embedding 提供定向攻击的 latent 方向；数据、模型、具体层、编辑空间和预算等尚待确认，尚未运行实验。
 
-- [papers/](papers/README.md)：论文原文与[文献汇总](papers/survey.md)。
-- [notes/](notes/README.md)：逐篇论文笔记与实验方案。
-- [code/](code/README.md)：数据、模型、攻击、反事实与实验入口。
-- [results/](results/README.md)：获批实验的输出与日志。
+源码与依赖入口：
 
-所有实验须先提交方案并经用户确认，统一使用 `/home/ll_yqs2/data/anaconda3/envs/myexplainer/bin/python`；长任务先执行获批的小规模 smoke test。
+- [src/](src/README.md)：数据接口、模型、攻击、反事实、配置及实验入口。
+- [README.md](README.md)：项目入口与协作要求。
+- [requirements.txt](requirements.txt)：指定 `myexplainer` 环境的现有依赖快照，并非已确认的项目最小依赖集。
+
+本地研究资料保存在 `papers/`（原文及索引）、`notes/paper_notes/`（逐篇论文笔记）、`notes/`（科研 TODO、论文研读与讨论、实验进度及方案）和 `results/`（获批实验输出）。研究日志不记录目录调整或 Git 等工程维护事项。`.gitignore` 显式列出这些研究目录、本地 `AGENTS.md`、`.gitignore` 和工具配置等忽略项。在已有本地工作区开展协作前，先阅读 `AGENTS.md`。未经用户明确允许，不得自主创建或修改 Git 提交。
+
+所有实验，包括训练、推理评估、攻击、生成与 smoke test，均须先提交具体方案并经用户明确确认。统一使用 `/home/ll_yqs2/data/anaconda3/envs/myexplainer/bin/python`，依赖查询和管理也使用该解释器的 `-m pip`；长任务先执行批准范围内的小规模 smoke test。攻击或生成期间固定分类器参数并使用评估模式，区分命中指定目标类别与普通类别翻转，未证明最优性时不声称扰动全局最小。
