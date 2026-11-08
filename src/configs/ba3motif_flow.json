@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "design_approval_date": "2026-11-08",
+  "approval_status": "已批准",
+  "approval_date": "2026-11-08",
+  "plan_path": "notes/experiment_plans/2026-11-08/experiment-ba3motif-soft-joint-smoke-plan.md",
+  "plan_sha256": "8f4ebb7c359642a417d004d4b204fa60985e1dd9c08d3d0f7113d17c0ee07bb8",
+  "approved_phases": [
+    "smoke"
+  ],
+  "approved_stages": [
+    "train"
+  ],
+  "results_root": "results/ba3motif-soft-counterfactual",
+  "threads": 4,
+  "seed": 20261108,
+  "smoke": {
+    "seconds": 1200,
+    "queries": 0,
+    "epochs": 2,
+    "graphs_per_class": 2
+  },
+  "full": {
+    "seconds": null,
+    "queries": null
+  },
+  "fixed_auxiliary_seed": 20261106,
+  "data_selection": {
+    "validation_manifest_input": "ae_samples",
+    "validation_ids_key": "selection_ids"
+  },
+  "inputs": {
+    "data": {
+      "path": "src/data/ba3motif/raw/graphs.npz",
+      "sha256": "a79863418159ec67e11d2c0283323d2a68a4d70814c59aba38b3d7cc1533d3b0"
+    },
+    "target": {
+      "path": "src/params/gnns/ba3motif/ba3motif_leconv.pt",
+      "sha256": "e4f4f28b5aa8e01d7d71130e11ec5af2e96142012658de94f705fd737d0182b0"
+    },
+    "proxy": {
+      "path": "src/params/gnns/ba3motif/ba3motif_leconv_surrogate.pt",
+      "sha256": "2961c286f4c2b8535830ab784dba1c6a5fab376141892ec6f0e65d464b9a2671"
+    },
+    "cache": {
+      "path": "results/ba3motif-surrogate-distillation/distill-002/queries.jsonl",
+      "sha256": "6c88dfd78f896a065444329b216203e3f95b7a0fa5b97ca7c04e7d611e922b0c"
+    },
+    "ae_checkpoint": {
+      "path": "results/ba3motif-v2-ae/full-001/checkpoints/B-selected.pt",
+      "sha256": "86da2e06af498f4e2d9c94e63e5a653e3fbf78c28f9d18691199e230bb199e0e"
+    },
+    "ae_summary": {
+      "path": "results/ba3motif-v2-ae/full-001/summary.json",
+      "sha256": "66593b727e7f7cec3076c04faaa4cdf2ca81549281d18577ad414d121cd781ff"
+    },
+    "ae_samples": {
+      "path": "results/ba3motif-v2-ae/full-001/samples.json",
+      "sha256": "ece6d4bb4850952c10993283ef684e6c6f2b9087f6a374c7b7957d0d09e55cad"
+    },
+    "ae_run": {
+      "path": "results/ba3motif-v2-ae/full-001/run.json",
+      "sha256": "fec1ed836a9cb5e107dedd7245e3b714ccf69bf9ca068f2b9165455cf67f12a0"
+    }
+  },
+  "ae": {
+    "features": 10,
+    "auxiliary": 8,
+    "hidden": 96,
+    "latent": 32,
+    "layers": 4,
+    "edge_hidden": 128
+  },
+  "flow": {
+    "latent": 32,
+    "hidden": 64,
+    "heads": 4,
+    "feedforward": 128,
+    "layers": 2,
+    "classes": 3
+  },
+  "stages": {
+    "train": {
+      "epochs": null,
+      "batch_size": 6,
+      "lr": 0.0001,
+      "seed": 20261108,
+      "steps": 2,
+      "multiplier": 1.0,
+      "lambda_cf": 1.0,
+      "lambda_dist": 0.01,
+      "target_policy": "all_other",
+      "std_floor": 1e-06
+    },
+    "evaluate": {
+      "batch_size": null,
+      "seed": null,
+      "steps": null,
+      "multiplier": null,
+      "split": null,
+      "target_policy": null,
+      "inputs": {
+        "flow_checkpoint": {
+          "path": null,
+          "sha256": null
+        }
+      }
+    }
+  },
+  "objective": {
+    "L_CFM_coefficient": 1,
+    "L_cf": "final soft graph surrogate target-class cross entropy",
+    "L_dist": "sum over i<j per graph; mean over batch; relative to original adjacency",
+    "L_boundary": 0,
+    "output": "soft adjacency",
+    "trainable": "flow only",
+    "backpropagation": "full lift and land; frozen decoder and proxy retain input gradients",
+    "flow_initialization": "random",
+    "normalization": "fit once on frozen AE latents of original training graphs; fixed thereafter"
+  },
+  "historical_reference": {
+    "cfm_only_results": "results/ba3motif-v2-structural-cfm/full-001",
+    "hard_test_results": "results/ba3motif-v2-test/full-001",
+    "status": "historical evidence only; neither initializes nor gates current flow training"
+  },
+  "seeds": {
+    "ae": 20261106
+  },
+  "device": "cuda:1",
+  "cuda_device_order": "PCI_BUS_ID",
+  "gpu_name": "NVIDIA RTX A6000"
+}

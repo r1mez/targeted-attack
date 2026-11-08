@@ -1,9 +1,11 @@
-# 实验入口与结果整理
+# 当前实验入口
 
-GNN 训练脚本集中在 `src/scripts/gnn_training/`。[训练命令与输出说明](gnn_training/README.md)
+- [gnn_training/](gnn_training/README.md)：既有目标 LEConv 训练。
+- [surrogate_training/](surrogate_training/README.md)：既有同构代理概率蒸馏。
+- [counterfactual_training/](counterfactual_training/README.md)：B AE 预训练、单阶段 Flow 联合训练与软图评价。
+- [boundary_transfer/](boundary_transfer/README.md)：独立软原型工具，当前训练不依赖它。
+- [diagnostics/](diagnostics/README.md)：既有模体/背景编辑诊断，作为本地资料保持 Git 忽略。
 
-已训练 BA3Motif 目标模型的 edge edit 诊断脚本位于 `src/scripts/diagnostics/`，只通过类别概率检查目标模型。[诊断说明](diagnostics/README.md)
+算法从 src/data、models、counterfactuals 导入，共享运行控制从 src/experiments 导入；入口不再互相作为共享库使用。
 
-BA3Motif 同构代理的概率蒸馏入口位于 `src/scripts/surrogate_training/`；执行配置和授权状态见[蒸馏方案](../../notes/experiment-ba3motif-surrogate-distillation-plan.md)。
-
-运行实验前，先提交包含假设、数据集、指标、预期结论和执行规模的方案并取得用户确认；smoke test 也适用。所有实验入口统一使用 `/home/ll_yqs2/data/anaconda3/envs/myexplainer/bin/python`，不得自行切换解释器。
+模型前向、训练、梯度检查和 smoke 必须关联新获批实验方案，统一使用 `/home/ll_yqs2/data/anaconda3/envs/myexplainer/bin/python`。历史批准和 smoke 不授权新源码运行。

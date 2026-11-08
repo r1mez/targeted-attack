@@ -1,0 +1,43 @@
+{
+  "approval_status": "待确认",
+  "plan_path": null,
+  "historical_approval": {
+    "approval_status": "已批准",
+    "plan_path": "notes/experiment_plans/2026-11-04/experiment-ba3motif-soft-boundary-plan.md",
+    "results_root": "results/ba3motif-soft-boundary",
+    "scope": "2026-11-04 旧实现已完成实验；不授权当前代码或新实验"
+  },
+  "dataset_root": "src/data/ba3motif",
+  "data_sha256": "a79863418159ec67e11d2c0283323d2a68a4d70814c59aba38b3d7cc1533d3b0",
+  "training_sha256": "8796f8757ad9314857942b95c2c85cd6390c7baa6c32e380b954173ee04bbad3",
+  "target_checkpoint": "src/params/gnns/ba3motif/ba3motif_leconv.pt",
+  "target_sha256": "e4f4f28b5aa8e01d7d71130e11ec5af2e96142012658de94f705fd737d0182b0",
+  "surrogate_checkpoint": "src/params/gnns/ba3motif/ba3motif_leconv_surrogate.pt",
+  "surrogate_sha256": "2961c286f4c2b8535830ab784dba1c6a5fab376141892ec6f0e65d464b9a2671",
+  "results_root": "results/ba3motif-soft-boundary-current",
+  "historical_results": [
+    "results/ba3motif-boundary-transfer",
+    "results/ba3motif-boundary-discretization",
+    "results/ba3motif-soft-boundary"
+  ],
+  "minimum_historical_target_forwards": 599,
+  "max_new_target_forwards": 21,
+  "total_target_forward_limit": 600,
+  "pairs": [[0, 1], [0, 2], [1, 2]],
+  "parents": [[381, 855, 309, 471, 950], [777, 325, 418, 935, 742], [636, 37, 533, 327, 435]],
+  "seed": 20261104,
+  "steps": 500,
+  "learning_rate": 0.05,
+  "adam_betas": [0.9, 0.999],
+  "adam_eps": 1e-8,
+  "gradient_clip": 5.0,
+  "structure_weight": 0.1,
+  "anchor_weight": 0.01,
+  "third_logit_margin": 2.0,
+  "probability_gap": 0.05,
+  "third_class_margin": 0.10,
+  "fractional_eps": 1e-6,
+  "interface_tolerance": 1e-5,
+  "smoke_seconds": 600,
+  "full_seconds": 1800
+}

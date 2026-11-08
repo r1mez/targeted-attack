@@ -1,14 +1,13 @@
-# 实验代码
+# 当前源码
 
-所有实际代码统一放入 `src/`。BA3Motif 已有数据加载器、LEConv 分类器和训练入口。实验审批与解释器要求见[项目 README](../README.md)。
+当前研究主干是 Graph AE B、无配对类别 CFM 与最终软图反事实损失。所有实际代码放在本目录。
 
-- [data/](data/README.md)：数据接口、预处理、划分与本地数据集。
-- [models/](models/README.md)：分类模型、检查点加载和预测接口。
-- [attacks/](attacks/README.md)：定向攻击方法及基线。
-- [counterfactuals/](counterfactuals/README.md)：反事实生成与可行性约束。
-- [configs/](configs/README.md)：明确、可记录的实验配置。
-- [scripts/](scripts/README.md)：训练、攻击、生成、评估及结果整理入口。
+- [data/](data/README.md)：BA3Motif raw/processed、固定划分、原图目标概率缓存对应。
+- [models/](models/README.md)：LEConv、冻结模型访问、可微带权代理与概率目标访问。
+- [counterfactuals/](counterfactuals/README.md)：B AE、类别 flow、软图生成、三项训练目标及独立软原型工具。
+- [experiments/](experiments/README.md)：共享审批、独立运行目录、指纹和资源记录。
+- [scripts/](scripts/README.md)：训练与评价入口；入口之间不相互导入算法实现。
+- [configs/](configs/README.md)：当前 AE / Flow / 软原型配置。
+- [attacks/](attacks/README.md)：尚无当前主线攻击实现。
 
-所有实验使用 `/home/ll_yqs2/data/anaconda3/envs/myexplainer/bin/python`。每次实验运行均须关联用户已确认的方案；长任务先运行批准范围内的小规模 smoke test。
-
-本地数据集按数据集名存放在 `src/data/` 下，GNN 检查点存放在 `src/params/gnns/{数据集名}/`。通过配置指定各项路径。Git 忽略本地数据集、权重和 Python 缓存。依赖说明见 [requirements.txt](../requirements.txt)。
+数据位于 `src/data/ba3motif/`；分类器权重位于 `src/params/gnns/ba3motif/`。既有 B AE / CFM 权重及其出处保留在原 `results/` 目录，由配置显式引用。固定使用项目解释器，模型运行需另行批准。

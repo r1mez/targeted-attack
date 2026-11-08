@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "design_approval_date": "2026-11-07",
+  "approval_status": "待确认",
+  "approval_date": null,
+  "plan_path": null,
+  "plan_sha256": null,
+  "approved_phases": [],
+  "approved_stages": [],
+  "results_root": "results/ba3motif-graph-ae",
+  "threads": null,
+  "seed": null,
+  "smoke": {
+    "seconds": null,
+    "queries": null,
+    "epochs": null,
+    "graphs_per_class": null
+  },
+  "full": {
+    "seconds": null,
+    "queries": null
+  },
+  "fixed_auxiliary_seed": 20261106,
+  "data_selection": {
+    "validation_manifest_input": "ae_samples",
+    "validation_ids_key": "selection_ids"
+  },
+  "inputs": {
+    "data": {
+      "path": "src/data/ba3motif/raw/graphs.npz",
+      "sha256": "a79863418159ec67e11d2c0283323d2a68a4d70814c59aba38b3d7cc1533d3b0"
+    },
+    "target": {
+      "path": "src/params/gnns/ba3motif/ba3motif_leconv.pt",
+      "sha256": "e4f4f28b5aa8e01d7d71130e11ec5af2e96142012658de94f705fd737d0182b0"
+    },
+    "cache": {
+      "path": "results/ba3motif-surrogate-distillation/distill-002/queries.jsonl",
+      "sha256": "6c88dfd78f896a065444329b216203e3f95b7a0fa5b97ca7c04e7d611e922b0c"
+    },
+    "ae_samples": {
+      "path": "results/ba3motif-v2-ae/full-001/samples.json",
+      "sha256": "ece6d4bb4850952c10993283ef684e6c6f2b9087f6a374c7b7957d0d09e55cad"
+    }
+  },
+  "ae": {
+    "features": 10,
+    "auxiliary": 8,
+    "hidden": 96,
+    "latent": 32,
+    "layers": 4,
+    "edge_hidden": 128
+  },
+  "stages": {
+    "ae": {
+      "epochs": null,
+      "batch_size": null,
+      "lr": null,
+      "seed": null,
+      "selection_metric": "soft_bce"
+    }
+  },
+  "seeds": {
+    "ae": 20261106
+  },
+  "device": "cuda:1",
+  "cuda_device_order": "PCI_BUS_ID",
+  "gpu_name": "NVIDIA RTX A6000"
+}
